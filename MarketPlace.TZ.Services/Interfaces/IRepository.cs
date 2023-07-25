@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MarketPlace.TZ.Services.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<T>
     {
+        Task<bool> DeleteAsync(int Id);
+        Task<T> GetByIdAsync(int Id);
+        Task<IEnumerable<T>> SelectAsync();
+        Task<IEnumerable<T>> PaginationSelectAsync(int index);
     }
 }
