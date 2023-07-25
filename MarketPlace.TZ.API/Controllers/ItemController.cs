@@ -24,7 +24,7 @@ namespace MarketPlace.TZ.API.Controllers
         [HttpGet("{index}")]
         public async Task<IEnumerable<Item>> PaginationSelect(int index)
         {
-            return await _unitOfWork.Items.PaginationSelectAsync(index);
+            return await _unitOfWork.Items.PaginationWithIndexAsync(index);
         }
 
         [HttpGet("{id}")]
@@ -45,10 +45,27 @@ namespace MarketPlace.TZ.API.Controllers
         [HttpDelete]
         public async Task<bool> Delete(int id)
         {
-           bool isSuccess = await _unitOfWork.Items.DeleteAsync(id);
+            bool isSuccess = await _unitOfWork.Items.DeleteAsync(id);
             await _unitOfWork.SaveAsync();
             _unitOfWork.Dispose();
             return isSuccess;
+        }
+
+        [HttpGet("{name}")]
+        public async Task<Item> SearchByName(string name)
+        {
+            return await _unitOfWork.Items.SearchByNameAsync(name);
+        }
+        [HttpGet("{limit}")]
+        public async Task<IEnumerable<Item>> Limit(int limit)
+        {
+            return await _unitOfWork.Items.PaginationWithPageLimitAsync(limit);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Item>> LimitPageIndex(int limit, int index)
+        {
+            return await _unitOfWork.Items.PaginationWithPageLimitAndIndexAsync(index,limit);
         }
     }
 }

@@ -50,5 +50,9 @@ namespace MarketPlace.TZ.Services
         {
             await _context.SaveChangesAsync();
         }
+        ~UnitOfWork()
+        {
+            Dispose();
+        }
     }
 }

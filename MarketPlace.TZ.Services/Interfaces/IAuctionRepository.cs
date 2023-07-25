@@ -6,5 +6,7 @@ namespace MarketPlace.TZ.Services.Interfaces
     public interface IAuctionRepository:IRepository<Auction>
     {
         Task<bool> CreateAsync(AuctionDto entity);
+
+        Task<IEnumerable<Auction>> SortAsync(string sortBy, string direction, int limit);
     }
 }
