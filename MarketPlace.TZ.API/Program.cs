@@ -18,13 +18,21 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Item MarketPlace - API",
+    });
+
+    string filePath = Path.Combine(AppContext.BaseDirectory, "MarketPlace.TZ.API.xml");
+    c.IncludeXmlComments(filePath);
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

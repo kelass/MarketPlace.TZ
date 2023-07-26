@@ -48,6 +48,11 @@ namespace MarketPlace.TZ.Services.Repositories
             return true;
         }
 
+        public async Task<IEnumerable<Item>> FilterByName(string name)
+        {
+            return await _context.Items.Where(item => item.Name.ToLower() == name.ToLower()).ToListAsync();
+        }
+
         public async Task<Item> GetByIdAsync(int Id)
         {
             return await _context.Items.FindAsync(Id);
@@ -68,9 +73,9 @@ namespace MarketPlace.TZ.Services.Repositories
             return await _context.Items.Take(limit).ToListAsync();
         }
 
-        public async Task<Item> SearchByNameAsync(string name)
+        public async Task<IEnumerable<Item>> SearchByNameAsync(string name)
         {
-            return await _context.Items.FirstOrDefaultAsync(item=>item.Name == name);
+            return await _context.Items.Where(item=>item.Name == name).ToListAsync();
         }
 
         public async Task<IEnumerable<Item>> SelectAsync()
