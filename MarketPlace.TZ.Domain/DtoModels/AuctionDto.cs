@@ -1,11 +1,12 @@
-﻿using MarketPlace.TZ.Domain.Enums;
+﻿using MarketPlace.TZ.Domain.DbModels;
+using MarketPlace.TZ.Domain.Enums;
 
-namespace MarketPlace.TZ.Domain.DbModels
+namespace MarketPlace.TZ.Domain.DtoModels
 {
-    public class Auction
+    public class AuctionDto
     {
         public int Id { get; set; }
-        public Item Item { get; set; }
+        public int ItemId { get; set; }
         public DateTime CreateDt { get; set; }
         public DateTime? FinishedDt { get; set; }
         public decimal Price { get; set; }

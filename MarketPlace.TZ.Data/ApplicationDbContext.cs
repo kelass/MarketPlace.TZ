@@ -9,7 +9,7 @@ namespace MarketPlace.TZ.Data
         public DbSet<Auction> Auctions { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
     }
 }
